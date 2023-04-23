@@ -24,8 +24,10 @@ const findAllFollowersByUserId = async (req, res) => {
 }
 
 const findAllFollowingByUserId = async (req, res) => {
+    console.log("Inside find all followingby ID");
     const UserId = req.params['UserId']
     const following = await followersDao.findAllFollowingByUserId(UserId)
+    console.log(following);
     res.json(following)
 }
 
@@ -57,7 +59,9 @@ export default (app) => {
     app.post('/api/followers', createFollower)
     app.get('/api/followers', findAllFollowers)
     app.get('/api/followers/:followerId', findFollowerById)
+/*
     app.get('/api/followers/follower/:UserId', findAllFollowersByUserId)
+*/
     app.get('/api/followers/following/:UserId', findAllFollowingByUserId)
     app.put('/api/followers/:followerId', updateFollower)
     app.delete('/api/followers/:followerId', deleteFollower)

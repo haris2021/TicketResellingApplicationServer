@@ -11,6 +11,12 @@ export const findAllEvents = async () => {
 export const findEventById = async (eventId) => {
     return await EventModel.findById(eventId);
 }
+export const findEventByUserId = async (Eorganizer) => {
+    console.log("From dao" + Eorganizer);
+    return await EventModel.find({Eorganizer : Eorganizer});
+}
+
+
 
 export const updateEvent = async (eventId, event) => {
     return await EventModel.updateOne({_id: eventId}, {$set: event})

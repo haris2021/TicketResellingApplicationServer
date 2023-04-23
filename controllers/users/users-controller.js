@@ -97,12 +97,16 @@ const login = async (req, res) => {
 
 const logout = async (req, res) => {
 
-    if (!req.session.currentUser) {
+    console.log("Logged out function in server!" + req.session.currentUser );
+
+    /*if (req.session.currentUser) {
+        console.log("If called")
         console.log(req.session);
         console.log(req.session.currentUser);
         res.sendStatus(404);
         return
-    }
+    }*/
+
     console.log("Destroyed");
     req.session.destroy();
     res.sendStatus(200);
@@ -125,6 +129,7 @@ const profile = async (req, res) => {
 
 export default (app) => {
 
+    app.post('/api/users/logout', logout);
     app.get('/api/users/profile', profile);
     app.post('/api/users', createUser);
     app.get('/api/users', findAllUsers);
@@ -134,7 +139,7 @@ export default (app) => {
     app.delete('/api/users/:userId', deleteUser);
     app.post('/api/users/register', register);
     app.post('/api/users/user/login', login);
-    app.post('/api/users/logout', logout);
+
 
 
 }
